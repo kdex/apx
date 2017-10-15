@@ -1,0 +1,7 @@
+get_filename_component("@PROJECT_NAME@_CMAKE_DIR" "${CMAKE_CURRENT_LIST_FILE}" PATH)
+set("@PROJECT_NAME@_INCLUDE_DIRS" "@INCLUDE_DIRS@")
+# Our library dependencies (contains definitions for IMPORTED targets)
+# if(NOT TARGET foo AND NOT FooBar_BINARY_DIR)
+# 	include("${FOOBAR_CMAKE_DIR}/FooBarTargets.cmake")
+# endif()
+set("@PROJECT_NAME@_LIBRARIES" "@PROJECT_NAME@")
