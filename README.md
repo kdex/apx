@@ -28,15 +28,15 @@ parser
 			.number()
 			.variadic();
 	});
-	auto config = parser.parse(argc, argv);
-	if (config.option["help"]) {
-		parser.help(argv);
+auto config = parser.parse(argc, argv);
+if (config.option["help"]) {
+	parser.help(argv);
+}
+else {
+	for (auto &&input : config.argument["INPUT"].values) {
+		std::cout << input.as<int>() << std::endl;
 	}
-	else {
-		for (auto &&input : config.argument["INPUT"].values) {
-			std::cout << input.as<int>() << std::endl;
-		}
-	}
+}
 ```
 
 ## API
