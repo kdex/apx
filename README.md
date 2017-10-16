@@ -14,29 +14,31 @@
 This following example makes a `Parser` that accepts `--help` and `-h` with arbitrarily many input arguments. The input arguments are only valid if they can be parsed as numerical values. If the user doesn't specify any input numbers, the numbers `1` and `2` are assumed by default.
 ```c++
 #include "apx/Parser.h"
-auto parser = apx::Parser();
-parser
-	.option([](auto &&config) {
-		config
-			.flag('h')
-			.flag("help")
-			.description("Displays this help");
-	})
-	.argument([](auto &&config) {
-		config
-			.name("INPUT")
-			.description("The input numbers to process")
-			.optional({ 1, 2 })
-			.number()
-			.variadic();
-	});
-auto config = parser.parse(argc, argv);
-if (config.option["help"]) {
-	parser.help(argv);
-}
-else {
-	for (auto &&input : config.argument["INPUT"].values) {
-		std::cout << input.as<int>() << std::endl;
+int main(int argc, const char *argv[]) {
+	auto parser = apx::Parser();
+	parser
+		.option([](auto &&config) {
+			config
+				.flag('h')
+				.flag("help")
+				.description("Displays this help");
+		})
+		.argument([](auto &&config) {
+			config
+				.name("INPUT")
+				.description("The input numbers to process")
+				.optional({ 1, 2 })
+				.number()
+				.variadic();
+		});
+	auto config = parser.parse(argc, argv);
+	if (config.option["help"]) {
+		parser.help(argv);
+	}
+	else {
+		for (auto &&input : config.argument["INPUT"].values) {
+			std::cout << input.as<int>() << std::endl;
+		}
 	}
 }
 ```
