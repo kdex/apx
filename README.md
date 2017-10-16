@@ -8,6 +8,7 @@
 - Numerical arguments
 - Functional API
 - Portable
+
 ## Example
 
 This following example makes a `Parser` that accepts `--help` and `-h` with arbitrarily many input arguments. The input arguments are only valid if they can be parsed as numerical values. If the user doesn't specify any input numbers, the numbers `1` and `2` are assumed by default.
@@ -38,7 +39,25 @@ else {
 	}
 }
 ```
-
+## Requirements
+You need a compiler that supports C++17.
+# Installation
+Cloning, compiling and linking `apx` can be fully automated. One way to do this in CMake is shown below.
+```cmake
+include(ExternalProject)
+ExternalProject_Add(apx-git
+	GIT_REPOSITORY git@github.com:kdex/apx.git
+	PREFIX ${CMAKE_BINARY_DIR}/apx
+	CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+	UPDATE_DISCONNECTED true
+)
+ExternalProject_Get_Property(apx-git INSTALL_DIR)
+include_directories(${INSTALL_DIR}/include)
+link_directories(${INSTALL_DIR}/lib)
+add_dependencies(your-executable apx-git)
+target_link_libraries(your-executable apx)
+```
+Apart from this, you can also consume `apx` via `find_package(apx)` once you have a build or installation.
 ## API
 ### Parser
 A `Parser` can contain `Argument`s and `Option`s.
@@ -60,9 +79,9 @@ Allows the user to specify the option using the short flag -`character`.
 Allows the user to specify the option using the long flag --`string`.
 #### `.description(string)`
 Adds a description text for an `Option`.
-#### `argument(config-function)`
+#### `.argument(config-function)`
 Adds an `Argument` to the `Option` which can be configured in `config-function`.
-#### `argument(n, config-function)`
+#### `.argument(n, config-function)`
 Adds an `Argument` with arity `n` to the `Option` which can be configured in `config-function`. This is identical to an `Argument` with `.min(n)` and `.max(n)`.
 ### Arguments
 An `Argument` is an element that can appear both inside as well as outside of an `Option`.

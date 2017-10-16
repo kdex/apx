@@ -80,4 +80,4 @@ int main(int argc, const char *argv[]) {
 		}
 	}
 }
-// TODO: reparsing, `providedName`
+// TODO: reparsing, `providedName`, remove string cast and make it synonymous to .as<std::string>()., option.as → 0
