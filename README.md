@@ -41,7 +41,7 @@ else {
 ```
 ## Requirements
 You need a compiler that supports C++17.
-# Installation
+## Installation
 Cloning, compiling and linking `apx` can be fully automated. One way to do this in CMake is shown below.
 ```cmake
 include(ExternalProject)
