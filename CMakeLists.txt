@@ -76,12 +76,12 @@ add_library(${PROJECT_NAME}
 	src/Parser.cc
 	src/Results.cc
 )
-add_executable(example
-	example/example.cc
-)
-target_link_libraries(example
-	apx
-)
+# add_executable(example
+# 	example/example.cc
+# )
+# target_link_libraries(example
+# 	apx
+# )
 add_definitions(-fdiagnostics-color=always)
 find_program(CCACHE_FOUND ccache)
 if(CCACHE_FOUND)
