@@ -9,8 +9,7 @@
 - Functional API
 - Portable
 
-## Example
-
+## Quick start
 This following example makes a `Parser` that accepts `--help` and `-h` with arbitrarily many input arguments. The input arguments are only valid if they can be parsed as numerical values. If the user doesn't specify any input numbers, the numbers `1` and `2` are assumed by default.
 ```c++
 #include "apx/Parser.h"
