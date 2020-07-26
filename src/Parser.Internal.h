@@ -12,7 +12,7 @@ struct arx::Parser::Internal : ArgumentContainer, OptionContainer {
 		public:
 			constexpr HelpGenerator(const Internal *internal)
 				: internal(internal) {}
-			void help(const char *argv[]) const {
+			void showHelp(const char *argv[]) const {
 				using namespace format;
 				auto indenter = Indenter();
 				std::stringstream ss;

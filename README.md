@@ -32,7 +32,7 @@ int main(int argc, const char *argv[]) {
 		});
 	auto config = parser.parse(argc, argv);
 	if (config.option["help"]) {
-		parser.help(argv);
+		parser.showHelp(argv);
 	}
 	else {
 		for (auto &&input : config.argument["INPUT"].values) {
@@ -65,7 +65,7 @@ Apart from this, you can also consume `arx` via `find_package(arx)` once you hav
 A `Parser` can contain `Argument`s and `Option`s.
 #### `.parse(argc, argv)`
 Creates a set of parse results.
-#### `.help(argv)`
+#### `.showHelp(argv)`
 Displays a help.
 #### `.option(config-function)`
 Adds an `Option` to the `Parser` which can be configured in `config-function`.

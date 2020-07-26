@@ -18,9 +18,9 @@ namespace arx {
 			Parser &operator=(Parser &&other) noexcept;
 			Parser &argument(const std::function<void(Argument &)> &&setup);
 			Parser &argument(std::size_t n, const std::function<void(Argument &)> &&setup);
-			Parser &help(const char *argv[]);
 			Parser &option(const std::function<void(Option &)> &&setup);
 			const Results parse(int argc, const char *argv[]);
+			Parser &showHelp(const char *argv[]);
 		private:
 			struct Internal;
 			std::unique_ptr<Internal> internal;

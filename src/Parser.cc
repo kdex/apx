@@ -22,14 +22,14 @@ Parser &Parser::argument(std::size_t n, const std::function<void(Argument &)> &&
 	internal->argument(n, std::forward<decltype(setup)>(setup));
 	return *this;
 }
-Parser &Parser::help(const char *argv[]) {
-	internal->helpGenerator.help(argv);
-	return *this;
-}
 Parser &Parser::option(const std::function<void(Option &)> &&setup) {
 	internal->option(std::forward<decltype(setup)>(setup));
 	return *this;
 }
 const Results Parser::parse(int argc, const char *argv[]) {
 	return internal->parse(argc, argv);
+}
+Parser &Parser::showHelp(const char *argv[]) {
+	internal->helpGenerator.showHelp(argv);
+	return *this;
 }
