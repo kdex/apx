@@ -67,21 +67,27 @@ set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} ${GLOBAL_CXX_DEBUG_FLAGS}")
 set(CMAKE_CXX_STANDARD 17)
 add_library(${PROJECT_NAME}
 	src/Argument.cc
+	src/Argument.h
 	src/ArgumentContainer.cc
+	src/ArgumentContainer.h
+	src/ArgumentMap.h
 	src/Castable.cc
+	src/Castable.h
 	src/format/format.cc
+	src/format/format.h
 	src/format/Indenter.cc
+	src/format/Indenter.h
 	src/Option.cc
+	src/Option.h
 	src/OptionContainer.cc
+	src/OptionContainer.h
 	src/Parser.cc
+	src/Parser.h
+	src/Parser.Internal.h
 	src/Results.cc
+	src/Results.h
+	src/Results.Internal.h
 )
-# add_executable(example
-# 	example/example.cc
-# )
-# target_link_libraries(example
-# 	arx
-# )
 add_definitions(-fdiagnostics-color=always)
 find_program(CCACHE_FOUND ccache)
 if(CCACHE_FOUND)
@@ -129,11 +135,12 @@ install(
 	ARCHIVE DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
 	LIBRARY DESTINATION "${INSTALL_LIB_DIR}" COMPONENT lib
 )
-# install(
-# 	DIRECTORY include/
-# 	DESTINATION "${INSTALL_INCLUDE_DIR}/${PROJECT_NAME}"
-# 	COMPONENT dev
-# )
+install(DIRECTORY src/
+	COMPONENT dev
+	DESTINATION "${INSTALL_INCLUDE_DIR}/${PROJECT_NAME}"
+	REGEX ".cc$" EXCLUDE
+	REGEX ".Internal.h$" EXCLUDE
+)
 export(
 	TARGETS ${PROJECT_NAME}
 	FILE "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_TARGET_FILE}"
