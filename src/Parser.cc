@@ -1,8 +1,8 @@
 #include <utility>
 #include "Parser.h"
 #include "Parser.Internal.h"
-using Parser = apx::Parser;
-using Results = apx::Results;
+using Parser = arx::Parser;
+using Results = arx::Results;
 Parser::Parser() : internal(std::make_unique<Internal>()) {}
 Parser::~Parser() = default;
 Parser::Parser(const Parser &other) : internal(std::make_unique<Internal>(*other.internal)) {}

@@ -2,7 +2,7 @@
 #include <numeric>
 #include <stdexcept>
 #include "format.h"
-namespace format = apx::format;
+namespace format = arx::format;
 std::string format::repeat(const std::string &string, std::size_t n) {
 	auto copy = std::string(string);
 	if (!n) {

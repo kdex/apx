@@ -3,7 +3,7 @@
 #include <optional>
 #include "Argument.h"
 #include "ArgumentContainer.h"
-namespace apx {
+namespace arx {
 	class Option : public ArgumentContainer {
 		/* TODO: Later? */
 // 		Option() = default;

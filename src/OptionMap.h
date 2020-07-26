@@ -2,7 +2,7 @@
 #include <algorithm>
 #include <vector>
 #include "Option.h"
-namespace apx {
+namespace arx {
 	class OptionMap {
 		public:
 			OptionMap(const std::vector<Option> &options) : options(options) {}

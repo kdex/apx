@@ -2,7 +2,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
-namespace apx::format {
+namespace arx::format {
 	std::string repeat(const std::string &string, std::size_t n);
 	std::string join(const std::vector<std::string> &range, const std::string &separator = ", ");
 	std::string parseNumber(const std::string &input);

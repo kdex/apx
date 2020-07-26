@@ -1,8 +1,8 @@
 #include <exception>
 #include "Argument.h"
 #include "Option.h"
-using Argument = apx::Argument;
-using Option = apx::Option;
+using Argument = arx::Argument;
+using Option = arx::Option;
 Option &Option::flag(const char flag) {
 	providedShortFlag = flag;
 	return *this;

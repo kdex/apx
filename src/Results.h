@@ -5,7 +5,7 @@
 #include "ArgumentMap.h"
 #include "Option.h"
 #include "OptionMap.h"
-namespace apx {
+namespace arx {
 	class Results {
 		public:
 			Results(const std::vector<Argument> &arguments, const std::vector<Option> &options);

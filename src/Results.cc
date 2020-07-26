@@ -2,7 +2,7 @@
 #include "Option.h"
 #include "Results.h"
 #include "Results.Internal.h"
-using Results = apx::Results;
+using Results = arx::Results;
 Results::Results(const std::vector<Argument> &arguments, const std::vector<Option> &options)
 	: arguments(arguments)
 	, argument(arguments)

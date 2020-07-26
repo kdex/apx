@@ -7,7 +7,7 @@
 #include "format/Indenter.h"
 #include "Option.h"
 #include "Results.h"
-namespace apx {
+namespace arx {
 	class Parser {
 		public:
 			Parser();

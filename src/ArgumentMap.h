@@ -1,7 +1,7 @@
 #pragma once
 #include <algorithm>
 #include <vector>
-namespace apx {
+namespace arx {
 	class ArgumentMap {
 		public:
 			ArgumentMap(const std::vector<Argument> &arguments) : arguments(arguments) {}

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.9.4)
-project(apx CXX)
+project(arx CXX)
 if(WIN32 AND NOT CYGWIN)
 	set(DEF_INSTALL_CMAKE_DIR cmake)
 else()
@@ -80,7 +80,7 @@ add_library(${PROJECT_NAME}
 # 	example/example.cc
 # )
 # target_link_libraries(example
-# 	apx
+# 	arx
 # )
 add_definitions(-fdiagnostics-color=always)
 find_program(CCACHE_FOUND ccache)

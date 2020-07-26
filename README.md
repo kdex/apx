@@ -1,5 +1,5 @@
-# apx
-`apx` is a functional-style C++ library that allows you to parse command-line arguments.
+# arx
+`arx` is a functional-style C++ library that allows you to parse command-line arguments.
 ## Features
 - Automatically generated help
 - CMake-consumable
@@ -12,9 +12,9 @@
 ## Quick start
 This following example makes a `Parser` that accepts `--help` and `-h` with arbitrarily many input arguments. The input arguments are only valid if they can be parsed as numerical values. If the user doesn't specify any input numbers, the numbers `1` and `2` are assumed by default.
 ```c++
-#include "apx/Parser.h"
+#include "arx/Parser.h"
 int main(int argc, const char *argv[]) {
-	auto parser = apx::Parser();
+	auto parser = arx::Parser();
 	parser
 		.option([](auto &&config) {
 			config
@@ -44,22 +44,22 @@ int main(int argc, const char *argv[]) {
 ## Requirements
 You need a compiler that supports C++17.
 ## Installation
-Cloning, compiling and linking `apx` can be fully automated. One way to do this in CMake is shown below.
+Cloning, compiling and linking `arx` can be fully automated. One way to do this in CMake is shown below.
 ```cmake
 include(ExternalProject)
-ExternalProject_Add(apx-git
-	GIT_REPOSITORY git@github.com:kdex/apx.git
-	PREFIX ${CMAKE_BINARY_DIR}/apx
+ExternalProject_Add(arx-git
+	GIT_REPOSITORY git@github.com:kdex/arx.git
+	PREFIX ${CMAKE_BINARY_DIR}/arx
 	CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
 	UPDATE_DISCONNECTED true
 )
-ExternalProject_Get_Property(apx-git INSTALL_DIR)
+ExternalProject_Get_Property(arx-git INSTALL_DIR)
 include_directories(${INSTALL_DIR}/include)
 link_directories(${INSTALL_DIR}/lib)
-add_dependencies(your-executable apx-git)
-target_link_libraries(your-executable apx)
+add_dependencies(your-executable arx-git)
+target_link_libraries(your-executable arx)
 ```
-Apart from this, you can also consume `apx` via `find_package(apx)` once you have a build or installation.
+Apart from this, you can also consume `arx` via `find_package(arx)` once you have a build or installation.
 ## API
 ### Parser
 A `Parser` can contain `Argument`s and `Option`s.

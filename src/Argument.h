@@ -24,7 +24,7 @@ std::ostream &operator<<(std::ostream &os, const std::vector<T> &vector) {
 	os << "]";
 	return os;
 }
-namespace apx {
+namespace arx {
 	class Argument {
 		public:
 			Argument &name(const std::string &text);

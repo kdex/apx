@@ -7,7 +7,7 @@
 #include "Option.h"
 #include "OptionContainer.h"
 #include "Results.h"
-struct apx::Parser::Internal : ArgumentContainer, OptionContainer {
+struct arx::Parser::Internal : ArgumentContainer, OptionContainer {
 	class HelpGenerator {
 		public:
 			constexpr HelpGenerator(const Internal *internal)

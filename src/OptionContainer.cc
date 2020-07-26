@@ -1,7 +1,7 @@
 #include <algorithm>
 #include "OptionContainer.h"
-using Option = apx::Option;
-using OptionContainer = apx::OptionContainer;
+using Option = arx::Option;
+using OptionContainer = arx::OptionContainer;
 void OptionContainer::option(const std::function<void(Option &)> &&setup) {
 	Option option;
 	setup(option);

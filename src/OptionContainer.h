@@ -1,7 +1,7 @@
 #pragma once
 #include <functional>
 #include "Option.h"
-namespace apx {
+namespace arx {
 	class OptionContainer {
 		public:
 			void option(const std::function<void(Option &)> &&setup);

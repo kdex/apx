@@ -1,6 +1,6 @@
 #pragma once
 #include "format.h"
-namespace apx::format {
+namespace arx::format {
 	class Indenter {
 		public:
 			std::string indent();

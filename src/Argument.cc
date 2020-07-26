@@ -1,6 +1,6 @@
 #include "Argument.h"
 #include <limits>
-using Argument = apx::Argument;
+using Argument = arx::Argument;
 Argument &Argument::name(const std::string &text) {
 	providedName = text;
 	hasMetadata = true;

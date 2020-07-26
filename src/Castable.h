@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-namespace apx {
+namespace arx {
 	class Castable {
 		public:
 			Castable(const std::string &value);

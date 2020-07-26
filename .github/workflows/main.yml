@@ -1,0 +1,92 @@
+jobs:
+  x64-linux:
+    # TODO: Replace `ubuntu-20.04` with `ubuntu-latest` once GitHub updates the alias.
+    # See: https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: Fetch history for all tags
+      run: .github/workflows/fetch-tags
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -yq build-essential cmake coreutils gcc
+    - name: Build targets
+      run: .github/workflows/build ${{ matrix.build-type }} ${{ matrix.compiler }}
+    strategy:
+      matrix:
+        compiler:
+          - clang++
+          - g++
+        build-type:
+          - Debug
+          - Release
+  x64-mac-os:
+    runs-on: macos-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Fetch history for all tags
+      run: .github/workflows/fetch-tags
+    - name: Install mac OS dependencies
+      run: brew install bash cmake gcc
+    - name: Build targets
+      run: .github/workflows/build ${{ matrix.build-type }} ${{ matrix.compiler }}
+    strategy:
+      matrix:
+        compiler:
+          - clang++
+          - g++
+        build-type:
+          - Debug
+          - Release
+  windows-visual-studio:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Fetch history for all tags
+      run: .github/workflows/fetch-tags
+      shell: bash
+    - name: Build targets
+      uses: lukka/run-cmake@v2
+      with:
+        buildDirectory: build
+        cmakeAppendedArgs: -A ${{ matrix.cmake-architecture }}
+        cmakeBuildType: ${{ matrix.build-type }}
+    strategy:
+      matrix:
+        triplet:
+          - x64-windows
+          - x86-windows
+        build-type:
+          - Debug
+          - Release
+        include:
+          - architecture: x64
+            cmake-architecture: x64
+            triplet: x64-windows
+          - architecture: x86
+            cmake-architecture: Win32
+            triplet: x86-windows
+  x64-windows-msys2:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Fetch history for all tags
+      run: .github/workflows/fetch-tags
+    - uses: msys2/setup-msys2@v1
+    - name: Install dependencies
+      run: pacman --needed --noconfirm -S cmake gcc make mingw-w64-x86_64-clang
+      shell: msys2 {0}
+    - name: Build targets
+      run: .github/workflows/build ${{ matrix.build-type }} ${{ matrix.compiler }}
+      shell: msys2 {0}
+    strategy:
+      matrix:
+        build-type:
+          - Debug
+          - Release
+        compiler:
+          - clang++
+          - g++
+name: build
+on:
+  - pull_request
+  - push

@@ -1,5 +1,5 @@
 #include "Indenter.h"
-namespace format = apx::format;
+namespace format = arx::format;
 using Indenter = format::Indenter;
 std::string Indenter::indent() {
 	++indentation;
