@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <numeric>
 #include <stdexcept>
-#include "format/format.h"
+#include "format.h"
 namespace format = apx::format;
 std::string format::repeat(const std::string &string, std::size_t n) {
 	auto copy = std::string(string);

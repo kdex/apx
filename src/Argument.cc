@@ -1,4 +1,5 @@
 #include "Argument.h"
+#include <limits>
 using Argument = apx::Argument;
 Argument &Argument::name(const std::string &text) {
 	providedName = text;
