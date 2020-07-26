@@ -30,7 +30,7 @@ int main(int argc, const char *argv[]) {
 				.number()
 				.variadic();
 		});
-	auto config = parser.parse(argc, argv);
+	const auto &&config = parser.parse(argc, argv);
 	if (config.option["help"]) {
 		parser.showHelp(argv);
 	}
@@ -44,20 +44,28 @@ int main(int argc, const char *argv[]) {
 ## Requirements
 You need a compiler that supports C++17.
 ## Installation
-Cloning, compiling and linking `arx` can be fully automated. One way to do this in CMake is shown below.
+Cloning, compiling and linking `arx` can be fully automated. One way to do this in CMake is shown below; you can also find this example [here](https://github.com/kdex/arx/tree/master/example).
 ```cmake
+cmake_minimum_required(VERSION 3.15)
+project(example)
 include(ExternalProject)
+set(INSTALLATION_PREFIX installation)
 ExternalProject_Add(arx-git
+	CMAKE_ARGS
+		-DCMAKE_INSTALL_PREFIX:PATH=${INSTALLATION_PREFIX}
+		-DCMAKE_BUILD_TYPE=Release
 	GIT_REPOSITORY git@github.com:kdex/arx.git
-	PREFIX ${CMAKE_BINARY_DIR}/arx
-	CMAKE_ARGS -DCMAKE_INSTALL_PREFIX=<INSTALL_DIR>
+	PREFIX ${CMAKE_CURRENT_BINARY_DIR}/arx-git
 	UPDATE_DISCONNECTED true
 )
-ExternalProject_Get_Property(arx-git INSTALL_DIR)
-include_directories(${INSTALL_DIR}/include)
-link_directories(${INSTALL_DIR}/lib)
-add_dependencies(your-executable arx-git)
-target_link_libraries(your-executable arx)
+ExternalProject_Get_Property(arx-git BINARY_DIR)
+set(INSTALLATION_PATH "${BINARY_DIR}/${INSTALLATION_PREFIX}")
+add_executable(${PROJECT_NAME})
+add_dependencies(${PROJECT_NAME} arx-git)
+target_include_directories(${PROJECT_NAME} PRIVATE "${INSTALLATION_PATH}/include")
+target_link_directories(${PROJECT_NAME} PRIVATE "${INSTALLATION_PATH}/lib")
+target_link_libraries(${PROJECT_NAME} PRIVATE arx)
+target_sources(${PROJECT_NAME} PRIVATE src/example.cc)
 ```
 Apart from this, you can also consume `arx` via `find_package(arx)` once you have a build or installation.
 ## API
