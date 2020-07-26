@@ -41,6 +41,34 @@ int main(int argc, const char *argv[]) {
 	}
 }
 ```
+The program above will behave like this:
+```bash
+$ ./example
+1
+2
+```
+```bash
+$ ./example 2 3 4
+2
+3
+4
+```
+```bash
+$ ./example one two
+Parse error at argument `INPUT`: Expected value `one` to be numeric
+```
+```bash
+$ ./example --help
+SYNTAX:
+        ./example [OPTIONS] [INPUT]...
+ARGUMENTS:
+        INPUT[={1, 2}]
+                The input numbers to process
+                Must be a number.
+OPTIONS:
+        -h, --help
+                Displays this help
+```
 ## Requirements
 You need a compiler that supports C++17.
 ## Installation
