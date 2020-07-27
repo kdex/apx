@@ -2,6 +2,7 @@
 `arx` is a functional-style C++ library that allows you to parse command-line arguments.
 ## Features
 - Automatically generated help
+- Values to certain options can be restricted
 - CMake-consumable
 - Options can take multiple arguments
 - Configurable argument arity
