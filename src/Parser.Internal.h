@@ -316,12 +316,8 @@ struct arx::Parser::Internal : ArgumentContainer, OptionContainer {
 	}
 	void merge(std::vector<Argument> &arguments) {
 		for (auto &&argument : arguments) {
-			if (argument.isSpecified || !argument.defaultValues.empty()) {
-				const std::int64_t difference = argument.defaultValues.size() - argument.values.size();
-				if (difference > 0) {
-					std::copy_n(argument.defaultValues.begin(), difference, std::back_inserter(argument.values));
-					
-				}
+			if (!argument.isSpecified && !argument.defaultValues.empty()) {
+				std::copy(argument.defaultValues.begin(), argument.defaultValues.end(), std::back_inserter(argument.values));
 			}
 		}
 	}
@@ -352,7 +348,13 @@ struct arx::Parser::Internal : ArgumentContainer, OptionContainer {
 				}
 				else {
 					if (activeOption) {
-						consume(token, *optionArgumentIterator, true);
+						if (activeOption->arguments.empty()) {
+							closeOption();
+							consume(token, activeArgument, true);
+						}
+						else {
+							consume(token, *optionArgumentIterator, true);
+						}
 					}
 					else {
 						if (!arguments.empty()) {
@@ -386,7 +388,9 @@ struct arx::Parser::Internal : ArgumentContainer, OptionContainer {
 				std::cerr << " at ";
 				if (activeOption) {
 					std::string optionName = "";
-					optionName += isOptionShort ? shortPrefix + activeOption->shortFlag() : longPrefix + activeOption->longFlag();
+					optionName += isOptionShort
+						? shortPrefix + activeOption->shortFlag()
+						: longPrefix + activeOption->longFlag();
 					std::cerr << "option `" << optionName << "`, argument `" << (*optionArgumentIterator)->name() << "`";
 				}
 				else {
